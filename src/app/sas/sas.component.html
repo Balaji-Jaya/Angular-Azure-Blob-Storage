@@ -1,0 +1,59 @@
+
+<h2 class="header"><div class="headerText">OCR File Uploader</div></h2>
+<div *ngIf="uploadLoader" class="spinner_overlay" ><clr-spinner class="spinner">Uploading ...</clr-spinner></div>
+<div *ngIf="emptyFile">
+<div class="alert alert-danger" role="alert">
+        <div class="alert-items">
+          <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+              <cds-icon class="alert-icon" shape="exclamation-circle"></cds-icon>
+            </div>
+            <span class="alert-text errorText">
+              You have not chosen any file!!
+            </span>
+          </div>
+        </div>
+      </div>
+</div>
+<div class="fileUpload">
+  <!-- <cds-icon shape="user" inverse status="danger" size="lg" solid aria-label="This"></cds-icon> -->
+<input type="file" #fileInput  matInput (change)="imageSelected($event.target.files[0])">
+<button class="btn btn-success" (click)="uploadImage(fileInput)">Upload</button>
+</div>
+
+<br>
+<clr-tabs>
+  <clr-tab>
+    <button clrTabLink class="tabName">Uploaded Files</button>
+    <clr-tab-content *clrIfActive="true">
+      <table>
+  <tr *ngFor="let pic of picturesList">
+    <td class="tableCol">{{pic}}</td>
+    <!-- <td><button (click)="deleteImage(pic)">DELETE</button></td> -->
+    <td class="tableColDelete"><button mat-raised-button class="btn btn-warning-outline" (click)="deleteImage(pic)">Delete</button></td>
+    <td class="tableColDownload"><button (click)="downloadImage(pic)" download="pic" class="btn btn-primary-outline">DOWNLOAD</button></td>
+  </tr>
+</table>
+    </clr-tab-content>
+  </clr-tab>
+  <clr-tab>
+    <button clrTabLink class="tabName">Viewable Files</button>
+    <clr-tab-content *clrIfActive="false">
+      <img *ngFor="let blob of picturesDownloaded" src="{{blob}}" height="100px">
+      <!-- <iframe *ngFor="let blob of picturesDownloaded" src="{{blob}}" width="800px" height="2100px" /> -->
+    </clr-tab-content>
+  </clr-tab>
+  <clr-tab>
+    <button clrTabLink class="tabName">More</button>
+    <clr-tab-content *clrIfActive="false">
+      Cloud content
+    </clr-tab-content>
+  </clr-tab>
+</clr-tabs>
+
+
+    
+<!-- <h4>List</h4>
+
+<h4>Downloaded</h4> -->
+

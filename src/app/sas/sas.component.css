@@ -1,0 +1,53 @@
+.spinner_overlay {
+
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(230, 225, 225);
+    opacity: 0.4;
+}
+
+.spinner{
+    top:30%;
+    left:50%;
+}
+
+.errorText{
+    text-align: center;
+}
+
+.fileUpload{
+    text-align: center;
+}
+
+.header{
+    text-align: center;
+}
+
+.headerText{
+    margin-left:40%;
+}
+
+.mat-body{
+    background-color:rgb(201, 201, 201)
+}
+
+.tabName{
+    font-size:large;
+    font-weight: 600;
+    color: rgb(59, 58, 58);
+    --clr-nav-link-active-color:rgb(59, 58, 58);
+    --clr-nav-link-active-font-weight:600;
+}
+
+.tableCol{
+    width:40%;
+}
+
+.tableColDelete{
+    width:10%;
+}
+
+/* .tableColDownload{
+    width:5%;
+} */
