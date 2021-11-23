@@ -1,0 +1,19 @@
+.footer{
+    position: sticky;
+    margin-top: 35%;
+    bottom: 0;
+    width: 100%;
+    /* Height of the footer*/ 
+    height: 50px;
+    background: rgb(81, 84, 90);
+  }
+
+  .copyright{
+    float:right;
+    margin-top: -30px;
+}
+
+.copyrightText{
+    color:antiquewhite;
+    padding-right: 5px;
+}

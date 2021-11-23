@@ -1,22 +1,179 @@
-<h2>Pictures with SAS</h2>
-<table>
-  <tr>
-    <td></td><td><input type="file" (change)="imageSelected($event.target.files[0])"></td>
-  </tr>
-  <tr>
-    <td>Insert SAS:</td><td><input type="text" (change)="setSas($event)" size="90"></td>
-  </tr>
-  <tr>
-    <td>Current SAS:</td><td>{{sas}}</td>
-  </tr>
-</table>
-<h4>List</h4>
-<table>
+
+<h2 class="header"><div class="headerText">OCR File Uploader</div><div class="signOutPage"><button mat-raised-button color="primary" (click)="signOutPage()">Sign out</button></div></h2>
+<div *ngIf="uploadLoader" class="spinner_overlay" ><clr-spinner class="spinner">Uploading ...</clr-spinner></div>
+<div *ngIf="emptyFile">
+<div class="alert alert-danger" role="alert">
+        <div class="alert-items">
+          <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+              <cds-icon class="alert-icon" shape="exclamation-circle"></cds-icon>
+            </div>
+            <span class="alert-text errorText">
+              You have not chosen any file!!
+            </span>
+          </div>
+        </div>
+      </div>
+</div>
+
+<div *ngIf="uploadFile">
+  <div class="alert alert-success" role="alert">
+          <div class="alert-items">
+            <div class="alert-item static">
+              <div class="alert-icon-wrapper">
+                <cds-icon class="alert-icon" shape="exclamation-circle"></cds-icon>
+              </div>
+              <span class="alert-text errorText">
+                File uploaded successfully to our OCR team to process!!
+              </span>
+            </div>
+          </div>
+        </div>
+  </div>
+  <mat-grid-list cols="2" rowHeight="3:1">
+    <mat-grid-tile>
+<div class="fileUpload">
+  <!-- <cds-icon shape="user" inverse status="danger" size="lg" solid aria-label="This"></cds-icon> -->
+<input type="file" #fileInput   (change)="imageSelected($event.target.files[0])">
+
+<button class="btn btn-success uploadButton" (click)="uploadImage(fileInput)" matTooltip="Make sure you chose the type">Upload</button>
+<br>
+<mat-radio-group (change)="onChange($event)" class="category-radio-group" name="category" aria-label="Select an option">
+  <mat-radio-button value="drivingLicence">Driving Licence</mat-radio-button><br>
+  <mat-radio-button value="other">Other</mat-radio-button>
+</mat-radio-group>
+<div *ngIf="categoryError" class="error">
+  Selection is required.
+</div> 
+</div>
+</mat-grid-tile>
+<mat-grid-tile>
+  <img class="ocrImage" src="https://images.ctfassets.net/3viuren4us1n/37Gfnr8duim9UdSmbjihkF/96d03f11da2b999c2ef7083385485e9c/OCR.jpg">
+</mat-grid-tile></mat-grid-list>
+<!-- <img src="https://images.ctfassets.net/3viuren4us1n/37Gfnr8duim9UdSmbjihkF/96d03f11da2b999c2ef7083385485e9c/OCR.jpg"> -->
+<br>
+<clr-tabs>
+  <clr-tab>
+    <button clrTabLink class="tabName">Uploaded Files</button>
+    <clr-tab-content *clrIfActive="true">
+      <table>
   <tr *ngFor="let pic of picturesList">
-    <td>{{pic}}</td>
-    <td><button (click)="deleteImage(pic)">DELETE</button></td>
-    <td><button (click)="downloadImage(pic)" download="pic">DOWNLOAD</button></td>
+    <td class="tableCol">{{pic}}</td>
+    <!-- <td><button (click)="deleteImage(pic)">DELETE</button></td> -->
+    <td class="tableColDelete"><button mat-raised-button class="btn btn-warning-outline" (click)="deleteImage(pic)">Delete</button></td>
+    <td class="tableColDownload"><button mat-raised-button  (click)="downloadImage(pic)" download="pic" class="btn btn-primary-outline">DOWNLOAD</button></td>
   </tr>
 </table>
-<h4>Downloaded</h4>
-<img *ngFor="let blob of picturesDownloaded" src="{{blob}}" height="100px">
+    </clr-tab-content>
+  </clr-tab>
+  <clr-tab>
+    <button clrTabLink class="tabName">Viewable Files</button>
+    <clr-tab-content *clrIfActive="false">
+      <img *ngFor="let blob of picturesDownloaded" src="{{blob}}" height="100px">
+      <!-- <iframe *ngFor="let blob of picturesDownloaded" src="{{blob}}" width="800px" height="2100px" /> -->
+    </clr-tab-content>
+  </clr-tab>
+  <clr-tab>
+    <button clrTabLink class="tabName">More to come</button>
+    <clr-tab-content *clrIfActive="false">
+
+      <mat-grid-list cols="2" rowHeight="1:1" [gutterSize]="'10px'">
+        <mat-grid-tile>
+          <mat-card class="example-card">
+            <mat-card-header >
+              <!-- <div mat-card-avatar class="example-header-image"></div> -->
+              <mat-card-title>Intelligent Character Recognition</mat-card-title>
+              <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+            </mat-card-header>
+            <img mat-card-image src="https://cdn.twistarticle.com/wp-content/uploads/2021/02/Improving-Workflow-Efficiency-by-Using-OCR-Technologies.jpg" alt="Photo of a Shiba Inu">
+            <mat-card-content>
+              <p>
+                Extract printed and handwritten text from images and documents with mixed languages and writing styles.
+              </p>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-card class="example-card">
+            <mat-card-header>
+              <mat-card-title>Image understanding</mat-card-title>
+            </mat-card-header>
+            <img mat-card-image src="https://innotech-vn.com/wp-content/uploads/2021/08/critical-thinking-la-gi-cach-ren-luyen-tu-duy-phan-bien-1-975x548-1.png" alt="Photo of a Shiba Inu">
+            <mat-card-content>
+              <p>
+                Pull from a rich ontology of more than 10,000 concepts and objects to generate value from your visual assets.
+              </p>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-card class="example-card" style="min-height: 92%;">
+            <mat-card-header>
+              <!-- <div mat-card-avatar class="example-header-image"><img mat-card-image src="https://img.freepik.com/free-vector/financial-audit-research-online-desktop-computer-pc-web-analysis-analytics-digital-report-flat_212005-285.jpg?size=626&ext=jpg" alt="Photo of a Shiba Inu"></div> -->
+              <mat-card-title>Special analysis</mat-card-title>
+            </mat-card-header>
+            <img mat-card-image src="https://www.clipartkey.com/mpngs/m/218-2181380_business-analysis-vector.png" alt="Photo of a Shiba Inu">
+            <mat-card-content>
+              <p>
+                Analyse how people move in a space in real time for occupancy count, social distancing and face mask detection.
+              </p>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-card class="example-card">
+            <mat-card-header>
+              <!-- <div mat-card-avatar class="example-header-image"></div> -->
+              <mat-card-title>Flexible deployment</mat-card-title>
+            </mat-card-header>
+            <img mat-card-image src="https://i.pinimg.com/originals/6f/a6/2f/6fa62f316d155c5f56a9ca283cd06741.png" alt="Photo of a Shiba Inu">
+            <mat-card-content>
+              <p>
+                Run Computer Vision in the cloud or on the edge, in containers.
+              </p>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+
+
+      <!-- <mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>Shiba Inu</mat-card-title>
+    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+  <mat-card-content>
+    <p>
+      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+      A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+      bred for hunting.
+    </p>
+  </mat-card-content>
+</mat-card>
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>Shiba Inu</mat-card-title>
+    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+  <mat-card-content>
+    <p>
+      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+      A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+      bred for hunting.
+    </p>
+  </mat-card-content>
+</mat-card> -->
+    </clr-tab-content>
+  </clr-tab>
+</clr-tabs>
+
+
+    
+<!-- <h4>List</h4>
+
+<h4>Downloaded</h4> -->
+

@@ -6,25 +6,25 @@ import { BlobServiceClient, ContainerClient } from '@azure/storage-blob';
 })
 export class AzureBlobStorageService {
 
-  // Enter your storage account name
-  picturesAccount = "<>";
-  // container name
-  picturesContainer = "pictures";
+  picturesAccount = "enimgstorage";
+  picturesContainer:any;
 
   // +IMAGES
-  public uploadImage(sas: string, content: Blob, name: string, handler: () => void) {
+  public uploadImage(sas: string,picturesContainer:any, content: Blob, name: string, handler: () => void) {
+    this.picturesContainer=picturesContainer;
     this.uploadBlob(content, name, this.containerClient(sas), handler)
   }
 
-  public listImages(sas: string): Promise<string[]> {
+  public listImages(sas: string,picturesContainer:any,): Promise<string[]> {
+    this.picturesContainer=picturesContainer
     return this.listBlobs(this.containerClient(sas))
   }
 
-  public downloadImage(sas: string, name: string, handler: (blob: Blob) => void) {
+  public downloadImage(sas: string,picturesContainer:String, name: string, handler: (blob: Blob) => void) {
     this.downloadBlob(name, this.containerClient(sas), handler)
   }
 
-  public deleteImage(sas: string, name: string, handler: () => void) {
+  public deleteImage(sas: string,picturesContainer:String, name: string, handler: () => void) {
     this.deleteBlob(name, this.containerClient(sas), handler)
   }
   // -IMAGES

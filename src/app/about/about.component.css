@@ -1,0 +1,79 @@
+.header{
+    min-height: 200px;
+    background-blend-mode: overlay;
+    background-position:50% 50%;
+    background-image: url('https://png.pngtree.com/thumb_back/fw800/back_our/20190621/ourmid/pngtree-flat-education-office-stationery-background-image_193764.jpg');
+}
+
+.headerText{
+    align-self: center;
+    margin-left: 35%;
+    color:rgb(255, 255, 255);
+    font-size: xx-large;
+    font-weight:900;
+}
+
+.logInButton{
+    align-self: center;
+    margin-left: 35%;
+    margin-top: -10%;
+}
+
+.subText{
+    font-size: small;
+    font-weight: 200;
+}
+
+.headerContent{
+    font-weight:900;
+    font-size: large;
+    text-align-last: center;
+}
+
+.content{
+    font-weight:200;
+    font-size: large;
+}
+
+.example-card{
+    width: 40%;
+    height:50px;
+    padding: 1%;
+    margin-left:3%;
+}
+
+.example-header-image1{
+    width:1%;
+    margin-left: 1%;
+}
+
+.example-header-image2{
+    width:1%;
+    margin-left: 1%;
+}
+
+.example-header-image4{
+    width:1%;
+    margin-left: 1%;
+}
+
+.example-header-image3{
+    width:4%;
+    margin-left: 1%;
+}
+
+.footerHeader{
+    font-size: medium;
+    font-family: fantasy;
+    margin-left:3%;
+    padding: 1%;
+}
+
+.role{
+    font-family: cursive;
+}
+
+.developerRole{
+    font-weight: 100;
+    font-size: small;
+}

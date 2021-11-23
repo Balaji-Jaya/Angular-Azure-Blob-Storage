@@ -1,0 +1,42 @@
+.headerText{
+    background-color: rgb(93, 97, 116);
+    align-self: center;
+    text-align: center;
+}
+
+.header {
+    background-color: rgb(93, 97, 116);
+}
+
+.logInButton{
+    align-self: center;
+    margin-left: 79%;
+}
+
+.swiper {
+    width: 600px;
+    height: 300px;
+  }
+
+  .example-card {
+    max-width: 400px;
+  }
+  
+  .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+
+  .footer{
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    /* Height of the footer*/ 
+    height: 50px;
+    background: rgb(81, 84, 90);
+  }
+
+  .copyright{
+      float:right;
+      color: hotpink;
+  }
